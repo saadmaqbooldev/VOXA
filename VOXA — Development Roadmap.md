@@ -1351,86 +1351,149 @@ For an offline desktop tool, monitoring is local and user-facing rather than rem
 
 Tick these in order. Every item maps to a chunk above.
 
+### Status legend
+
+Use these exact tags so any AI tool parses them consistently:
+
+```
+[ ] TODO         — not started
+[~] IN_PROGRESS  — started, not complete
+[x] DONE         — complete and working
+[!] BLOCKED      — stuck; reason must go in Notes
+[s] SKIPPED      — deliberately descoped; reason must go in Notes
+```
+
+Each task has a `Notes:` line — record the actual library/pattern used, key decisions, or
+gotchas once you touch it. Leave placeholders (`—`) until then.
+
 **Phase 0 — Foundation**
 
-- [x] 0.1 Repository, environment and lockfile, verified by clean clone on both machines *(2026-09-21: package tree, pyproject.toml, requirements.lock, .gitignore, config, logging, README, Makefile pushed to github.com/saadmaqbooldev/VOXA (main); local venv install + `pytest`/`ruff`/`black --check`/`mypy` all pass. Second-developer clean-clone verification is a follow-up, not a blocker — repo is public/pushed and ready for them to clone.)*
-- [ ] 0.2 CI, pre-commit, branch protection, first reviewed PR merged *(2026-09-21: ci.yml pushed and triggers on push/PR; pre-commit hooks installed and passing locally; PR/issue templates and smoke test in place. Remaining: branch protection rule on `main` and one reviewed PR merged — blocked on GitHub CLI auth, in progress.)*
+- [x] 0.1 Repository, environment and lockfile, verified by clean clone on both machines
+  Notes: Dev environment is Windows; scaffolded natively via PowerShell/Git Bash (no WSL2). Layout matches §6: `voxa/{core,services,db,ui,utils}`, `training/{data,models,evaluation}`, `tests/{unit,integration,fixtures}`, `docs/`, `models/`, `data/{raw,interim,processed}`, all with `__init__.py`. `pyproject.toml` is pip/setuptools-managed (not uv), Python pinned to 3.11 via the `py` launcher since 3.14 is the machine default. `requirements.lock` frozen at 139 pins (`pip freeze`, editable self-reference stripped). `.gitignore` initially had an unanchored `models/` pattern that silently excluded `training/models/*.py` (source, not artifacts) — fixed by anchoring to `/models/`, `/data/raw|interim|processed/`. `voxa/config.py` (`Settings(BaseSettings)` via pydantic-settings) and `voxa/utils/logging.py` (rotating file handler) in place. Pushed to github.com/saadmaqbooldev/VOXA (`main`, commit 430d0d4). Verified locally: venv install, `pytest`, `ruff`, `black --check`, `mypy` all green. Second-developer clean-clone verification still outstanding — not blocking, repo is pushed and ready.
+- [!] 0.2 CI, pre-commit, branch protection, first reviewed PR merged
+  Notes: `.github/workflows/ci.yml` (ruff + black --check + mypy + pytest on push/PR, `windows-latest`) pushed. `.pre-commit-config.yaml` (ruff, black, mypy) installed locally and passing on commit. PR template + 2 issue templates (`bug_report.md`, `task.md`) added. BLOCKED: branch protection on `main` and the first reviewed PR need the GitHub REST API via `gh` CLI — installed via `winget install GitHub.cli`, but `gh auth login`'s interactive browser flow can't run in this non-interactive shell. Waiting on user to either paste a PAT (`repo` scope) or run `gh auth login` themselves.
 - [ ] 0.3 Charter and ADRs approved; A-1 to A-8 all decided
+  Notes: —
 - [ ] 8.1 Safe-handling procedure approved and CI execution-guard in place *(scheduled here, not in Phase 8)*
+  Notes: —
 - [ ] **Phase 0 complete**
+  Notes: —
 
 **Phase 1 — Dataset and feature contract**
 
-- [ ] 1.1 Datasets acquired, inventoried, ransomware label rule documented *(2026-09-21: BODMAS access granted; EMBER access request pending — team confirmed only view access so far)*
+- [~] 1.1 Datasets acquired, inventoried, ransomware label rule documented
+  Notes: BODMAS access granted 2026-09-21 (official source: whyisyoung.github.io/BODMAS, GitHub github.com/whyisyoung/BODMAS — gated, requested via institutional email). EMBER is ungated/public (github.com/elastic/ember); team saw "view access" on the repo, which is normal read access for anyone, not a restriction — direct tarball URLs (`https://ember.elastic.co/ember_dataset_2018_2.tar.bz2` etc.) given but download not yet confirmed done. `docs/datasets.md` not yet created.
 - [ ] 1.2 Feature Specification v1.0 frozen; parity audit passed *(SP-1)*
+  Notes: —
 - [ ] 1.3 EDA report merged; leakage question answered
+  Notes: —
 - [ ] **Phase 1 complete**
+  Notes: —
 
 **Phase 2 — Feature extraction**
 
 - [ ] 2.1 Extractor produces the 23-vector; per-feature unit tests pass
+  Notes: —
 - [ ] 2.2 Hostile fixture suite green; no crashes, no hangs
+  Notes: —
 - [ ] 2.3 Batch extraction producing a versioned Parquet table
+  Notes: —
 - [ ] **Phase 2 complete**
+  Notes: —
 
 **Phase 3 — Data preparation and baseline**
 
 - [ ] 3.1 Random, family-disjoint and temporal splits saved; no hash overlap
+  Notes: —
 - [ ] 3.2 Preprocessor fitted, serialized, parity test green *(SP-2)*
+  Notes: —
 - [ ] 3.3 Baseline results recorded; target thresholds agreed
+  Notes: —
 - [ ] **Phase 3 complete**
+  Notes: —
 
 **Phase 4 — Models**
 
 - [ ] 4.1 XGBoost tuned, serialized, logged to MLflow
+  Notes: —
 - [ ] 4.2 TabNet tuned, serialized, CPU latency measured *(SP-4)*
+  Notes: —
 - [ ] 4.3 Both calibrated; full metrics across three scenarios; error analysis written; improvement iteration run
+  Notes: —
 - [ ] **Phase 4 complete**
+  Notes: —
 
 **Phase 5 — Ensemble and XAI**
 
 - [ ] 5.1 Three strategies compared, one selected, config serialized
+  Notes: —
 - [ ] 5.1 XGBoost vs TabNet vs ensemble comparison table produced
+  Notes: —
 - [ ] 5.2 Explanations generated with templates for all 23 features; latency within budget
+  Notes: —
 - [ ] **Phase 5 complete**
+  Notes: —
 
 **Phase 6 — Pipeline and persistence**
 
 - [ ] 6.1 Database schema, repository, migrations, round-trip test *(can be done from week 3)*
+  Notes: —
 - [ ] 6.2 Inference engine with version check, golden-vector self-test, stage timings
+  Notes: —
 - [ ] 6.3 `scan()` orchestrator satisfying FR-1 to FR-9 *(SP-5, main integration point)*
+  Notes: —
 - [ ] **Phase 6 complete**
+  Notes: —
 
 **Phase 7 — Interfaces**
 
 - [ ] SP-3 `ScanResult` and `Explanation` contracts frozen
+  Notes: —
 - [ ] 7.1 CLI: all commands, exit codes, JSON output
+  Notes: —
 - [ ] 7.2 GUI scan view: verdict, confidence, both model scores, explanation chart, no freeze
+  Notes: —
 - [ ] 7.3 History view, search, filter, JSON and PDF export
+  Notes: —
 - [ ] **Phase 7 complete**
+  Notes: —
 
 **Phase 8 — Testing and hardening**
 
 - [ ] 8.2 Coverage floor enforced; regression suite in CI; performance test passing
+  Notes: —
 - [ ] 8.3 Family-disjoint and temporal degradation measured; hard-benign FPR measured; threat model and limitations written
+  Notes: —
 - [ ] 8.4 UAT complete with 5–8 testers; must-fix defects closed and re-tested
+  Notes: —
 - [ ] **Phase 8 complete**
+  Notes: —
 
 **Phase 9 — Packaging and release**
 
 - [ ] Week-10 packaging spike done *(de-risking, not a deliverable)*
+  Notes: —
 - [ ] 9.1 PyInstaller build runs on a clean, offline Windows VM
+  Notes: —
 - [ ] 9.2 Artifact metadata, compatibility check, retraining and promotion rules documented
+  Notes: —
 - [ ] 9.3 v1.0.0 tagged, release notes and artifacts published
+  Notes: —
 - [ ] **Phase 9 complete**
+  Notes: —
 
 **Phase 10 — Documentation and defence**
 
 - [ ] 10.1 Full `docs/` set complete; a stranger can install from it alone
+  Notes: —
 - [ ] 10.2 Final report written; every figure traceable to a logged run *(SP-6)*
+  Notes: —
 - [ ] 10.3 Demo script, two timed rehearsals, fallback recording, sample-handling agreed
+  Notes: —
 - [ ] 10.4 Optional dashboard *(only if everything above is done)*
+  Notes: —
 - [ ] **Phase 10 complete — project delivered**
+  Notes: —
 
 ## 14. Final build order
 
