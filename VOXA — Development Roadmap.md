@@ -1353,8 +1353,8 @@ Tick these in order. Every item maps to a chunk above.
 
 **Phase 0 — Foundation**
 
-- [ ] 0.1 Repository, environment and lockfile, verified by clean clone on both machines *(scaffolded 2026-09-21: package tree, pyproject.toml, .gitignore, config, logging, README, Makefile in place; venv created; awaiting clean-clone verification by the second developer)*
-- [ ] 0.2 CI, pre-commit, branch protection, first reviewed PR merged *(scaffolded 2026-09-21: ci.yml, pre-commit config, PR/issue templates, smoke test added; no GitHub remote/branch protection/reviewed PR yet)*
+- [ ] 0.1 Repository, environment and lockfile, verified by clean clone on both machines *(2026-09-21: package tree, pyproject.toml, requirements.lock, .gitignore, config, logging, README, Makefile committed (430d0d4); `make setup`-equivalent verified locally — venv installs clean, `pytest`/`ruff`/`black --check`/`mypy` all pass; still awaiting clean-clone verification by the second developer, since that's the actual DoD)*
+- [ ] 0.2 CI, pre-commit, branch protection, first reviewed PR merged *(2026-09-21: ci.yml, pre-commit config installed locally, PR/issue templates, smoke test committed; still need: GitHub remote created, branch protection on `main`, and one reviewed PR merged by the second developer)*
 - [ ] 0.3 Charter and ADRs approved; A-1 to A-8 all decided
 - [ ] 8.1 Safe-handling procedure approved and CI execution-guard in place *(scheduled here, not in Phase 8)*
 - [ ] **Phase 0 complete**
