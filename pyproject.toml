@@ -1,0 +1,67 @@
+[project]
+name = "voxa"
+version = "0.1.0"
+description = "Pre-execution ransomware detection for Windows PE files using a static-feature XGBoost + TabNet ensemble"
+requires-python = ">=3.11,<3.12"
+readme = "README.md"
+
+dependencies = [
+    "pefile>=2023.2.7",
+    "xgboost>=2.0",
+    "scikit-learn>=1.4",
+    "pytorch-tabnet>=4.1",
+    "torch>=2.2",
+    "pandas>=2.2",
+    "numpy>=1.26",
+    "pydantic>=2.6",
+    "pydantic-settings>=2.2",
+    "sqlalchemy>=2.0",
+    "alembic>=1.13",
+    "shap>=0.45",
+    "mlflow>=2.11",
+    "typer>=0.12",
+    "rich>=13.7",
+    "pyqt6>=6.6",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=4.1",
+    "pytest-qt>=4.4",
+    "ruff>=0.3",
+    "black>=24.1",
+    "mypy>=1.9",
+    "pre-commit>=3.6",
+]
+
+[project.scripts]
+voxa = "voxa.ui.cli:app"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["voxa*", "training*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true
+disallow_untyped_defs = false
+warn_unused_ignores = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=voxa --cov-report=term-missing"
