@@ -1368,131 +1368,131 @@ gotchas once you touch it. Leave placeholders (`—`) until then.
 
 **Phase 0 — Foundation**
 
-- [x] 0.1 Repository, environment and lockfile, verified by clean clone on both machines
+- [x] DONE P0.1 — Repository, environment and lockfile, verified by clean clone on both machines *(Chunk 0.1)*
   Notes: Dev environment is Windows; scaffolded natively via PowerShell/Git Bash (no WSL2). Layout matches §6: `voxa/{core,services,db,ui,utils}`, `training/{data,models,evaluation}`, `tests/{unit,integration,fixtures}`, `docs/`, `models/`, `data/{raw,interim,processed}`, all with `__init__.py`. `pyproject.toml` is pip/setuptools-managed (not uv), Python pinned to 3.11 via the `py` launcher since 3.14 is the machine default. `requirements.lock` frozen at 139 pins (`pip freeze`, editable self-reference stripped). `.gitignore` initially had an unanchored `models/` pattern that silently excluded `training/models/*.py` (source, not artifacts) — fixed by anchoring to `/models/`, `/data/raw|interim|processed/`. `voxa/config.py` (`Settings(BaseSettings)` via pydantic-settings) and `voxa/utils/logging.py` (rotating file handler) in place. Pushed to github.com/saadmaqbooldev/VOXA (`main`, commit 430d0d4). Verified locally: venv install, `pytest`, `ruff`, `black --check`, `mypy` all green. Second-developer clean-clone verification still outstanding — not blocking, repo is pushed and ready.
-- [!] 0.2 CI, pre-commit, branch protection, first reviewed PR merged
+- [!] BLOCKED P0.2 — CI, pre-commit, branch protection, first reviewed PR merged *(Chunk 0.2)*
   Notes: `.github/workflows/ci.yml` (ruff + black --check + mypy + pytest on push/PR, `windows-latest`) pushed. `.pre-commit-config.yaml` (ruff, black, mypy) installed locally and passing on commit. PR template + 2 issue templates (`bug_report.md`, `task.md`) added. BLOCKED: branch protection on `main` and the first reviewed PR need the GitHub REST API via `gh` CLI — installed via `winget install GitHub.cli`, but `gh auth login`'s interactive browser flow can't run in this non-interactive shell. Waiting on user to either paste a PAT (`repo` scope) or run `gh auth login` themselves.
-- [ ] 0.3 Charter and ADRs approved; A-1 to A-8 all decided
+- [ ] TODO P0.3 — Charter and ADRs approved; A-1 to A-8 all decided *(Chunk 0.3)*
   Notes: —
-- [ ] 8.1 Safe-handling procedure approved and CI execution-guard in place *(scheduled here, not in Phase 8)*
+- [ ] TODO P0.4 — Safe-handling procedure approved and CI execution-guard in place *(Chunk 8.1, scheduled here not in Phase 8)*
   Notes: —
-- [ ] **Phase 0 complete**
+- [ ] TODO P0.5 — Phase 0 complete
   Notes: —
 
 **Phase 1 — Dataset and feature contract**
 
-- [~] 1.1 Datasets acquired, inventoried, ransomware label rule documented
+- [~] IN_PROGRESS P1.1 — Datasets acquired, inventoried, ransomware label rule documented *(Chunk 1.1)*
   Notes: BODMAS access granted 2026-09-21 (official source: whyisyoung.github.io/BODMAS, GitHub github.com/whyisyoung/BODMAS — gated, requested via institutional email). EMBER is ungated/public (github.com/elastic/ember); team saw "view access" on the repo, which is normal read access for anyone, not a restriction — direct tarball URLs (`https://ember.elastic.co/ember_dataset_2018_2.tar.bz2` etc.) given but download not yet confirmed done. `docs/datasets.md` not yet created.
-- [ ] 1.2 Feature Specification v1.0 frozen; parity audit passed *(SP-1)*
+- [ ] TODO P1.2 — Feature Specification v1.0 frozen; parity audit passed *(Chunk 1.2, SP-1)*
   Notes: —
-- [ ] 1.3 EDA report merged; leakage question answered
+- [ ] TODO P1.3 — EDA report merged; leakage question answered *(Chunk 1.3)*
   Notes: —
-- [ ] **Phase 1 complete**
+- [ ] TODO P1.4 — Phase 1 complete
   Notes: —
 
 **Phase 2 — Feature extraction**
 
-- [ ] 2.1 Extractor produces the 23-vector; per-feature unit tests pass
+- [ ] TODO P2.1 — Extractor produces the 23-vector; per-feature unit tests pass *(Chunk 2.1)*
   Notes: —
-- [ ] 2.2 Hostile fixture suite green; no crashes, no hangs
+- [ ] TODO P2.2 — Hostile fixture suite green; no crashes, no hangs *(Chunk 2.2)*
   Notes: —
-- [ ] 2.3 Batch extraction producing a versioned Parquet table
+- [ ] TODO P2.3 — Batch extraction producing a versioned Parquet table *(Chunk 2.3)*
   Notes: —
-- [ ] **Phase 2 complete**
+- [ ] TODO P2.4 — Phase 2 complete
   Notes: —
 
 **Phase 3 — Data preparation and baseline**
 
-- [ ] 3.1 Random, family-disjoint and temporal splits saved; no hash overlap
+- [ ] TODO P3.1 — Random, family-disjoint and temporal splits saved; no hash overlap *(Chunk 3.1)*
   Notes: —
-- [ ] 3.2 Preprocessor fitted, serialized, parity test green *(SP-2)*
+- [ ] TODO P3.2 — Preprocessor fitted, serialized, parity test green *(Chunk 3.2, SP-2)*
   Notes: —
-- [ ] 3.3 Baseline results recorded; target thresholds agreed
+- [ ] TODO P3.3 — Baseline results recorded; target thresholds agreed *(Chunk 3.3)*
   Notes: —
-- [ ] **Phase 3 complete**
+- [ ] TODO P3.4 — Phase 3 complete
   Notes: —
 
 **Phase 4 — Models**
 
-- [ ] 4.1 XGBoost tuned, serialized, logged to MLflow
+- [ ] TODO P4.1 — XGBoost tuned, serialized, logged to MLflow *(Chunk 4.1)*
   Notes: —
-- [ ] 4.2 TabNet tuned, serialized, CPU latency measured *(SP-4)*
+- [ ] TODO P4.2 — TabNet tuned, serialized, CPU latency measured *(Chunk 4.2, SP-4)*
   Notes: —
-- [ ] 4.3 Both calibrated; full metrics across three scenarios; error analysis written; improvement iteration run
+- [ ] TODO P4.3 — Both calibrated; full metrics across three scenarios; error analysis written; improvement iteration run *(Chunk 4.3)*
   Notes: —
-- [ ] **Phase 4 complete**
+- [ ] TODO P4.4 — Phase 4 complete
   Notes: —
 
 **Phase 5 — Ensemble and XAI**
 
-- [ ] 5.1 Three strategies compared, one selected, config serialized
+- [ ] TODO P5.1 — Three ensemble strategies compared, one selected, config serialized *(Chunk 5.1)*
   Notes: —
-- [ ] 5.1 XGBoost vs TabNet vs ensemble comparison table produced
+- [ ] TODO P5.2 — XGBoost vs TabNet vs ensemble comparison table produced *(Chunk 5.1)*
   Notes: —
-- [ ] 5.2 Explanations generated with templates for all 23 features; latency within budget
+- [ ] TODO P5.3 — Explanations generated with templates for all 23 features; latency within budget *(Chunk 5.2)*
   Notes: —
-- [ ] **Phase 5 complete**
+- [ ] TODO P5.4 — Phase 5 complete
   Notes: —
 
 **Phase 6 — Pipeline and persistence**
 
-- [ ] 6.1 Database schema, repository, migrations, round-trip test *(can be done from week 3)*
+- [ ] TODO P6.1 — Database schema, repository, migrations, round-trip test *(Chunk 6.1, can start week 3)*
   Notes: —
-- [ ] 6.2 Inference engine with version check, golden-vector self-test, stage timings
+- [ ] TODO P6.2 — Inference engine with version check, golden-vector self-test, stage timings *(Chunk 6.2)*
   Notes: —
-- [ ] 6.3 `scan()` orchestrator satisfying FR-1 to FR-9 *(SP-5, main integration point)*
+- [ ] TODO P6.3 — `scan()` orchestrator satisfying FR-1 to FR-9 *(Chunk 6.3, SP-5, main integration point)*
   Notes: —
-- [ ] **Phase 6 complete**
+- [ ] TODO P6.4 — Phase 6 complete
   Notes: —
 
 **Phase 7 — Interfaces**
 
-- [ ] SP-3 `ScanResult` and `Explanation` contracts frozen
+- [ ] TODO P7.1 — `ScanResult` and `Explanation` contracts frozen *(SP-3)*
   Notes: —
-- [ ] 7.1 CLI: all commands, exit codes, JSON output
+- [ ] TODO P7.2 — CLI: all commands, exit codes, JSON output *(Chunk 7.1)*
   Notes: —
-- [ ] 7.2 GUI scan view: verdict, confidence, both model scores, explanation chart, no freeze
+- [ ] TODO P7.3 — GUI scan view: verdict, confidence, both model scores, explanation chart, no freeze *(Chunk 7.2)*
   Notes: —
-- [ ] 7.3 History view, search, filter, JSON and PDF export
+- [ ] TODO P7.4 — History view, search, filter, JSON and PDF export *(Chunk 7.3)*
   Notes: —
-- [ ] **Phase 7 complete**
+- [ ] TODO P7.5 — Phase 7 complete
   Notes: —
 
 **Phase 8 — Testing and hardening**
 
-- [ ] 8.2 Coverage floor enforced; regression suite in CI; performance test passing
+- [ ] TODO P8.1 — Coverage floor enforced; regression suite in CI; performance test passing *(Chunk 8.2)*
   Notes: —
-- [ ] 8.3 Family-disjoint and temporal degradation measured; hard-benign FPR measured; threat model and limitations written
+- [ ] TODO P8.2 — Family-disjoint and temporal degradation measured; hard-benign FPR measured; threat model and limitations written *(Chunk 8.3)*
   Notes: —
-- [ ] 8.4 UAT complete with 5–8 testers; must-fix defects closed and re-tested
+- [ ] TODO P8.3 — UAT complete with 5–8 testers; must-fix defects closed and re-tested *(Chunk 8.4)*
   Notes: —
-- [ ] **Phase 8 complete**
+- [ ] TODO P8.4 — Phase 8 complete
   Notes: —
 
 **Phase 9 — Packaging and release**
 
-- [ ] Week-10 packaging spike done *(de-risking, not a deliverable)*
+- [ ] TODO P9.1 — Week-10 packaging spike done *(de-risking, not a deliverable)*
   Notes: —
-- [ ] 9.1 PyInstaller build runs on a clean, offline Windows VM
+- [ ] TODO P9.2 — PyInstaller build runs on a clean, offline Windows VM *(Chunk 9.1)*
   Notes: —
-- [ ] 9.2 Artifact metadata, compatibility check, retraining and promotion rules documented
+- [ ] TODO P9.3 — Artifact metadata, compatibility check, retraining and promotion rules documented *(Chunk 9.2)*
   Notes: —
-- [ ] 9.3 v1.0.0 tagged, release notes and artifacts published
+- [ ] TODO P9.4 — v1.0.0 tagged, release notes and artifacts published *(Chunk 9.3)*
   Notes: —
-- [ ] **Phase 9 complete**
+- [ ] TODO P9.5 — Phase 9 complete
   Notes: —
 
 **Phase 10 — Documentation and defence**
 
-- [ ] 10.1 Full `docs/` set complete; a stranger can install from it alone
+- [ ] TODO P10.1 — Full `docs/` set complete; a stranger can install from it alone *(Chunk 10.1)*
   Notes: —
-- [ ] 10.2 Final report written; every figure traceable to a logged run *(SP-6)*
+- [ ] TODO P10.2 — Final report written; every figure traceable to a logged run *(Chunk 10.2, SP-6)*
   Notes: —
-- [ ] 10.3 Demo script, two timed rehearsals, fallback recording, sample-handling agreed
+- [ ] TODO P10.3 — Demo script, two timed rehearsals, fallback recording, sample-handling agreed *(Chunk 10.3)*
   Notes: —
-- [ ] 10.4 Optional dashboard *(only if everything above is done)*
+- [ ] TODO P10.4 — Optional dashboard, only if everything above is done *(Chunk 10.4)*
   Notes: —
-- [ ] **Phase 10 complete — project delivered**
+- [ ] TODO P10.5 — Phase 10 complete — project delivered
   Notes: —
 
 ## 14. Final build order
